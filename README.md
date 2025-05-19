@@ -31,7 +31,7 @@ A clean, minimal Neovim setup focused on Python and C++ development with modern 
 
 ```bash
 # Make sure your config directory exists
-mkdir -p ~/.config
+mkdir -p ~/.config/nvim
 
 # Navigate to the config directory
 cd ~/.config
