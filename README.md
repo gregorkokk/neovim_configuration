@@ -37,7 +37,7 @@ mkdir -p ~/.config/nvim
 cd ~/.config
 
 # Clone the repository
-https://github.com/gregorkokk/neovim_configuration
+git clone https://github.com/gregorkokk/neovim_configuration
 ```
 
 2. Start Neovim - Lazy.nvim will automatically install on first launch:
