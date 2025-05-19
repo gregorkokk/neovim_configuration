@@ -20,7 +20,7 @@ A clean, minimal Neovim setup focused on Python and C++ development with modern 
 
 ### Prerequisites
 
-- Neovim 0.9.0 or higher
+- Neovim version 0.10.0 or higher
 - Git
 - Node.js and npm (for LSP servers)
 - A nerdfont for proper icons (optional but recommended)
