@@ -15,6 +15,7 @@ A clean, minimal Neovim setup focused on Python and C++ development with modern 
 - **Autocompletion** - Smart completion with nvim-cmp
 - **Treesitter** - Enhanced syntax highlighting for multiple languages
 - **Lazy.nvim** - Plugin management with lazy-loading
+- **Autopairs** - Automatic insertion of closing pairs
 
 ## Installation
 
@@ -22,7 +23,6 @@ A clean, minimal Neovim setup focused on Python and C++ development with modern 
 
 - Neovim version 0.10.0 or higher
 - Git
-- Node.js and npm (for LSP servers)
 - A nerdfont for proper icons (optional but recommended)
 
 ### Setup
