@@ -14,7 +14,7 @@ return {
       -- Don't add pairs if the next character is alphanumeric
       ignored_next_char = "[%w%.]",
       fast_wrap = {
-        map = "<leader>e",
+        map = "<M-e>",  -- Alt + e
         chars = { "{", "[", "(", '"', "'" },
         pattern = [=[[%'%"%)%>%]%)%}%,]]=],
         end_key = "$",
