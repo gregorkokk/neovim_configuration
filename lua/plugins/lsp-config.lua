@@ -21,17 +21,38 @@ return {
 
       local lspconfig = require("lspconfig")
 
-      -- Configure Jedi language server for Python
+      -- Configure Jedi language server for Python -> Python Config
       lspconfig.jedi_language_server.setup({
         capabilities = capabilities
       })
 
+      -- Lua Config
       lspconfig.lua_ls.setup({
         capabilities = capabilities
       })
 
       lspconfig.ast_grep.setup({
         capabilities = capabilities
+      })
+
+      -- clangd for C/C++ Config
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
+        init_options = {
+          usePlaceholders = true,
+          completeUnimported = true,
+          clangdFileStatus = true,
+        },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
