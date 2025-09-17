@@ -9,33 +9,29 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
-    opts = {
-      auto_install = true,
-    },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "clangd", "lua_ls", "jedi_language_server" },
+        automatic_installation = true,
+      })
+    end,
   },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
       local lspconfig = require("lspconfig")
 
-      -- Configure Jedi language server for Python -> Python Config
+      -- Your existing LSP configurations...
       lspconfig.jedi_language_server.setup({
         capabilities = capabilities
       })
 
-      -- Lua Config
       lspconfig.lua_ls.setup({
         capabilities = capabilities
       })
 
-      lspconfig.ast_grep.setup({
-        capabilities = capabilities
-      })
-
-      -- clangd for C/C++ Config
       lspconfig.clangd.setup({
         capabilities = capabilities,
         cmd = {
@@ -55,6 +51,12 @@ return {
         filetypes = { "c", "cpp", "objc", "objcpp" },
       })
 
+      -- Remove ast_grep setup if you don't need it
+      -- lspconfig.ast_grep.setup({
+      --   capabilities = capabilities
+      -- })
+
+      -- Your existing keymaps...
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
