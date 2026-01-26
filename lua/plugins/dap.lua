@@ -1,5 +1,3 @@
--- DAP (Debug Adapter Protocol) - Professional debugging with breakpoints, variable inspection, step debugging
-
 return {
   {
     "mfussenegger/nvim-dap",

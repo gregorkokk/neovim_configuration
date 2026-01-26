@@ -1,68 +1,52 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "clangd", "lua_ls", "jedi_language_server" },
-        automatic_installation = true,
-      })
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local lspconfig = require("lspconfig")
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+		opts = {
+			auto_install = true,
+		},
+	},
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		config = function()
+			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				cmp_nvim_lsp.default_capabilities()
+			)
 
-      -- Your existing LSP configurations...
-      lspconfig.jedi_language_server.setup({
-        capabilities = capabilities
-      })
+			local lspconfig = require("lspconfig")
 
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities
-      })
+			-- Configure Jedi language server for Python
+			lspconfig.jedi_language_server.setup({
+				capabilities = capabilities,
+			})
 
-      lspconfig.clangd.setup({
-        capabilities = capabilities,
-        cmd = {
-          "clangd",
-          "--background-index",
-          "--clang-tidy",
-          "--header-insertion=iwyu",
-          "--completion-style=detailed",
-          "--function-arg-placeholders",
-          "--fallback-style=llvm",
-        },
-        init_options = {
-          usePlaceholders = true,
-          completeUnimported = true,
-          clangdFileStatus = true,
-        },
-        filetypes = { "c", "cpp", "objc", "objcpp" },
-      })
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
 
-      -- Remove ast_grep setup if you don't need it
-      -- lspconfig.ast_grep.setup({
-      --   capabilities = capabilities
-      -- })
+			-- For C/C++
+			lspconfig.clangd.setup({
+				capabilities = capabilities,
+			})
 
-      -- Your existing keymaps...
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
-    end,
-  },
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
+		end,
+	},
 }

@@ -7,14 +7,14 @@ return {
     npairs.setup({
       check_ts = true, -- Use treesitter if available
       ts_config = {
-        lua = {'string'},
-        python = {'string'},
-        cpp = {'string'},
+        lua = { 'string' },
+        python = { 'string' },
+        cpp = { 'string' },
       },
       -- Don't add pairs if the next character is alphanumeric
       ignored_next_char = "[%w%.]",
       fast_wrap = {
-        map = "<M-e>",  -- Alt + e
+        map = "<M-e>", -- Alt + e
         chars = { "{", "[", "(", '"', "'" },
         pattern = [=[[%'%"%)%>%]%)%}%,]]=],
         end_key = "$",
