@@ -25,22 +25,26 @@ return {
 				cmp_nvim_lsp.default_capabilities()
 			)
 
-			local lspconfig = require("lspconfig")
-
-			-- Configure Jedi language server for Python
-			lspconfig.jedi_language_server.setup({
+			-- Use the new vim.lsp.config API for Neovim 0.11+
+			vim.lsp.config('jedi_language_server', {
 				capabilities = capabilities,
 			})
 
-			lspconfig.lua_ls.setup({
+			vim.lsp.config('lua_ls', {
 				capabilities = capabilities,
 			})
 
 			-- For C/C++
-			lspconfig.clangd.setup({
+			vim.lsp.config('clangd', {
 				capabilities = capabilities,
 			})
 
+			-- Enable the language servers
+			vim.lsp.enable('jedi_language_server')
+			vim.lsp.enable('lua_ls')
+			vim.lsp.enable('clangd')
+
+			-- Key mappings
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
