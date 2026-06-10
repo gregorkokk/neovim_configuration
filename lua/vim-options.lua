@@ -15,3 +15,5 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 vim.opt.termguicolors = true
+
+vim.opt.formatoptions:remove({ "r", "o" })
