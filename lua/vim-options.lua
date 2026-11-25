@@ -16,4 +16,11 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 vim.opt.termguicolors = true
 
-vim.opt.formatoptions:remove({ "r", "o" })
+-- Don't auto-continue comments on Enter (r) or o/O (o).
+-- Must be a FileType autocmd: filetype plugins (e.g. C++) re-enable these after init.lua runs.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" })
+  end,
+})

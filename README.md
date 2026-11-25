@@ -4,14 +4,17 @@ A clean, minimal Neovim setup focused on Python and C++ development with modern 
 
 ## Features
 
-- **Catppuccin Theme** - Beautiful dark colorscheme with the mocha variant
+- **Catppuccin Theme** - Beautiful dark colorscheme with the frappe variant
 - **Telescope** - Fuzzy finder for files, grep, and more
 - **Neo-tree** - File explorer with a modern UI
 - **Oil.nvim** - Edit your filesystem like a buffer
 - **LSP Integration** - Code intelligence with:
   - Jedi Language Server for Python
   - Lua Language Server for Lua
-  - Ast-grep for improved code search
+  - clangd for C/C++
+- **Debugging** - nvim-dap with a debug UI and inline variable values:
+  - codelldb for C/C++
+  - debugpy for Python (runs your code in the nearest `.venv`)
 - **Autocompletion** - Smart completion with nvim-cmp
 - **Treesitter** - Enhanced syntax highlighting for multiple languages
 - **Lazy.nvim** - Plugin management with lazy-loading
@@ -71,6 +74,24 @@ nvim
 - `Space+gf` - Format current buffer
 - `Space+ca` - Code actions
 - `Space+rn` - Rename symbol
+
+### Debugging
+
+- `Space+dc` - Start / continue
+- `Space+dn` - Step over
+- `Space+di` - Step into
+- `Space+do` - Step out
+- `Space+db` - Toggle breakpoint
+- `Space+dB` - Conditional breakpoint
+- `Space+dr` - Open REPL
+- `Space+du` - Toggle debug UI
+- `Space+dt` - Terminate session
+
+The debug UI opens and closes automatically with each session. For C/C++, compile with `-g` and give the path to the binary when asked.
+
+## Editor Behavior
+
+- **No automatic comment continuation** - Pressing `Enter` (or `o`/`O`) on a `//` comment line gives a clean new line instead of inserting another `//`. This is done with a `FileType` autocmd in `vim-options.lua`, because filetype plugins (e.g. C++) turn the `r` and `o` flags of `formatoptions` back on after `init.lua` runs.
 
 ## Language Support
 
